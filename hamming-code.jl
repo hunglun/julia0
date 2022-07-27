@@ -62,6 +62,11 @@ println("maximum distance ", maximum(all_dist))
 # Observation 2: the xor is often written as ⊕, because it is equivalent to addition modulo 2.
 
 # Observation 3
-# Hamming 7 3 4 code
+# Hamming 7 4 3 code, 7 is block length, 4 is the number of basis vectors, 3
+# is the minimum distance.
 # minimum distance 3
 # maximum distance 7
+
+# Concept of Relative distance
+# The relative distance of a code is the minimum distance over block length 
+# For example, the relative distance of hamming code is 3/7
