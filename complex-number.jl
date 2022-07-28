@@ -32,3 +32,6 @@ end
 
 @assert(_multiply(c, c) == c * c)
 println("DONE")
+
+# conjugate
+@assert(abs2(c) == c*cbar)
