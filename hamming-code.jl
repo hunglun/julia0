@@ -42,13 +42,19 @@ end
 # generate the entire code space
 codespace = [enc(v(x)) for x in collect(1:15)]
 # find the min and max distance
+# Proposition: the minimum distance of a codespace is equal the minimum weight of all nonzero codes.
+# Proof:
+# Let W be the minimum weight of all nonzero code.
+# Let D be the minimum distance.
+# By way of contradiction, suppose W > D,
+# Let x,y ∈ C, s.t. d(x,y) = D
+# Since x-y ∈ C, we have d(x-y, 0) = D ≥ W 💣
 all_distances() = begin
     result = []
+    z = zeros(7)
     for a in codespace
-        for b in codespace
-            if a != b
-                pushfirst!(result, d(a, b))
-            end
+        if sum(a) != 0
+            pushfirst!(result, d(a, z))
         end
     end
     return result
