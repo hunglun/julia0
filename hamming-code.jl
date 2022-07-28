@@ -48,7 +48,7 @@ codespace = [enc(v(x)) for x in collect(1:15)]
 # Let D be the minimum distance.
 # By way of contradiction, suppose W > D,
 # Let x,y ∈ C, s.t. d(x,y) = D
-# Since x-y ∈ C, we have d(x-y, 0) = D ≥ W 💣
+# Since x-y ∈ C, we have d(x-y, 0) = D ≥ W 🚀
 all_distances() = begin
     result = []
     z = zeros(7)
