@@ -76,3 +76,51 @@ println("maximum distance ", maximum(all_dist))
 # Concept of Relative distance
 # The relative distance of a code is the minimum distance over block length 
 # For example, the relative distance of hamming code is 3/7
+
+# Parity Check Matrix
+H = [0 0 0 1 1 1 1
+    0 1 1 0 0 1 1
+    1 0 1 0 1 0 1]
+
+print("H is a parity check matrix of G that kills every code.")
+@assert(
+    (H * G) .% 2 == [0 0 0 0
+        0 0 0 0
+        0 0 0 0])
+
+# decode using parity check matrix
+# corr = x -> (G * x) .% 2
+
+# x = [1 0 1 0]
+flip_bit0(c) = (c + Array([1, 0, 0, 0, 0, 0, 0])) .% 2
+flip_bit1(c) = (c + Array([0, 1, 0, 0, 0, 0, 0])) .% 2
+flip_bit2(c) = (c + Array([0, 0, 1, 0, 0, 0, 0])) .% 2
+flip_bit3(c) = (c + Array([0, 0, 0, 1, 0, 0, 0])) .% 2
+flip_bit4(c) = (c + Array([0, 0, 0, 0, 1, 0, 0])) .% 2
+flip_bit5(c) = (c + Array([0, 0, 0, 0, 0, 1, 0])) .% 2
+flip_bit6(c) = (c + Array([0, 0, 0, 0, 0, 0, 1])) .% 2
+
+c = codespace[10]
+y = flip_bit0(c)
+correct0(y) = (H * y) .% 2
+# RHS corresponds to the ith column of H, indicating bit flip occurs at ith bit of c.
+@assert(correct0(y) == [0, 0, 1])
+
+correct(y) = begin
+    error_column = (H * y) .% 2
+    for i in collect(1:7)
+        if H[:, i] == error_column
+            y[i] = (y[i] + 1) % 2
+        end
+    end
+    return y
+end
+
+@assert(correct(flip_bit0(c)) == c)
+@assert(correct(flip_bit1(c)) == c)
+@assert(correct(flip_bit2(c)) == c)
+@assert(correct(flip_bit3(c)) == c)
+@assert(correct(flip_bit4(c)) == c)
+@assert(correct(flip_bit5(c)) == c)
+@assert(correct(flip_bit6(c)) == c)
+
