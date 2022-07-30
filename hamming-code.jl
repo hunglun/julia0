@@ -88,9 +88,6 @@ print("H is a parity check matrix of G that kills every code.")
         0 0 0 0
         0 0 0 0])
 
-# decode using parity check matrix
-# corr = x -> (G * x) .% 2
-
 # x = [1 0 1 0]
 flip_bit0(c) = (c + Array([1, 0, 0, 0, 0, 0, 0])) .% 2
 flip_bit1(c) = (c + Array([0, 1, 0, 0, 0, 0, 0])) .% 2
