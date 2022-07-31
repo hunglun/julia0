@@ -1,3 +1,4 @@
+using LinearAlgebra
 # rectangular form 
 c = 2 + 1im
 cbar = conj(c)
@@ -31,7 +32,7 @@ _multiply(x, y) = begin
 end
 
 @assert(_multiply(c, c) == c * c)
-println("DONE")
+
 
 # conjugate
 @assert(abs2(c) == c * cbar)
@@ -44,3 +45,16 @@ hermitian = z -> conj(transpose(z))
 s = [2 c
     conj(c) 5]
 @assert(s == hermitian(s))
+
+# eigen values of a Hermitian matrix are real
+a = eigvals(s)
+for e in a
+    @assert(real(e) == e)
+end
+d = eigvecs(s)
+# eigen vectors of hermitian matrix are orthogonal
+hermitian(d[:, 1]) * d[:, 2] # close to zero
+
+
+
+println("DONE")
