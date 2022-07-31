@@ -34,4 +34,13 @@ end
 println("DONE")
 
 # conjugate
-@assert(abs2(c) == c*cbar)
+@assert(abs2(c) == c * cbar)
+
+# hermitian
+hermitian = z -> conj(transpose(z))
+# Note : As a noun, hermitian means transpose conjugate. 
+# As an adjective, it means a special property of a matrix m,
+# where m = hermitian(m). Such a matrix is called hermitian matrix.
+s = [2 c
+    conj(c) 5]
+@assert(s == hermitian(s))
