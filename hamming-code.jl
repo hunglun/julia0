@@ -147,3 +147,13 @@ end
 # (0, [1, 1, 0, 1, 0, 1, 0]) <-- s
 # (1, [0, 1, 0, 1, 0, 1, 0])
 # (2, [1, 0, 1, 1, 0, 1, 0])
+
+# Or a theoretical example
+# both 0000000 and some non-zero code that has 3 ones in it.
+# Both are codewords. Now flip 2 ones in the nonzero code. 
+# If you do not know how many bit flips occur, it is impossible to correct it. 
+
+# However, if probability of single bit error is p, 
+# then the probability of 2 bit error is p². As long as p² << p, it pays 
+# to correct detected bit errors, even if it means miscorrection sometimes.     
+# reference https://viterbi-web.usc.edu/~tbrun/Course/lecture20.pdf  
