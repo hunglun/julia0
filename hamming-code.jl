@@ -121,3 +121,29 @@ end
 @assert(correct(flip_bit5(c)) == c)
 @assert(correct(flip_bit6(c)) == c)
 
+# Challenge
+# Let s be an error string with 1 bit flip from a code word, c1.
+# What is its distance from the other code words?
+# If the distance of s from the another code word c2, is 2,
+# then how do we know if s is generated from c1 by 1 bit flip or c2 by 2 bit flip?
+
+s = flip_bit0(c)
+all_distances_from_error_string(s) = begin
+    result = []
+    for a in codespace
+        @assert(a != s)
+        pushfirst!(result, (d(a, s), a))
+    end
+    return result
+end
+println("All distances from the error string")
+println((0, s))
+for a in sort(all_distances_from_error_string(s))
+    println(a)
+end
+
+# Observation: it is impossible to correct s, if 
+# we do not know how many bit flip has occurred in s. 
+# (0, [1, 1, 0, 1, 0, 1, 0]) <-- s
+# (1, [0, 1, 0, 1, 0, 1, 0])
+# (2, [1, 0, 1, 1, 0, 1, 0])
